@@ -1,0 +1,46 @@
+/* ========= 代码块 ========= */
+table {
+  width: 100%;
+  background-color: $highlight-title-background-color;
+  border-collapse: collapse;
+  @extend .border-radius_3px;
+}
+tbody {
+  color: $highlight-body-color;
+  background-color: $highlight-body-background-color;
+}
+td {
+  @extend .padding_0;
+}
+pre {
+  @extend .margin_0;
+  padding: .3em 0;
+}
+.line {
+  font-size: .8em;
+  line-height: 1.4;
+}
+.line::after {
+  content: "";
+  @extend .display-inlineBlock;
+}
+.gutter {
+  width: 1.5em;
+  text-align: center;
+  color: $highlight-number-color;
+  border-right: 2px solid $highlight-number-border-color;
+}
+.code {
+  text-indent: 1em;
+}
+table::before {
+  display: block;
+  width: 1.7em;
+  padding: .3em;
+  color: $highlight-title-color;
+  background-color: $highlight-title-background-color;
+  border-radius: 3px 3px 0 0;
+}
+
+@import "./_highlight-color";
+@import "./_highlight-title";

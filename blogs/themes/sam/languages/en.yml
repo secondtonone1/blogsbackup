@@ -1,0 +1,20 @@
+aside_menu:
+  home: Home
+  archives: Archives
+  tags: Tags
+  links: Links
+  about: About
+  rss: RSS
+
+# paginator
+paginator:
+  prev: prev
+  next: next
+
+# page title
+title:
+  tags: All tags
+  categories: All categories
+  about: About
+  links: Blogroll
+  archives: Posts In Total

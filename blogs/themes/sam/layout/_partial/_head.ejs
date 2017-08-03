@@ -1,0 +1,25 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta name="keywords" content="<%= config.keywords %>">
+  <meta name="description" content="<%= config.description %>">
+  <meta name="author" content="<%= config.author %>">
+
+  <% if ( page.title ) { %>
+  <title><%= page.title %></title>
+  <% } else { %>
+  <title><%= config.title %></title>
+  <% } %>
+
+  <link rel="alternate" href="/atom.xml" title="<%= config.title %>" type="application/atom+xml">
+  <link rel="canonical" href="<%= url %>">
+  <%- favicon_tag( config.favicon ) %>
+  <%- css( "/css/style.css" ) %>
+  <link rel="stylesheet" href="<%= config.fontface_url %>">
+</head>
