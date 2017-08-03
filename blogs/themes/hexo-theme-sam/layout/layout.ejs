@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="<%= config.language %>">
+  <%- partial('_partial/_head') %>
+
+  <body>
+    <%- partial( "_partial/_aside" ) %>
+
+    <article class="main" id="main">
+      <%- body %>
+      <%- partial( "./_partial/_footer.ejs" ) %>
+    </article>
+
+    <%- js( "/js/to-top.js" ) %>
+    <%- js( "/js/search.js" ) %>
+  </body>
+</html>

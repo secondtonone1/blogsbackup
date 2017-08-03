@@ -1,0 +1,121 @@
+/* ========= markdown 语法 ========= */
+p {
+  @extend .text-indent-abbr;
+  line-height: 1.6;
+}
+blockquote p {
+  @extend .text-indent-none;
+}
+a {
+  color: $link-color;
+  @extend .text-decoration-none;
+}
+a:hover {
+  color: $link-color-hover;
+  @extend .text-decoration-underline;
+}
+img {
+  @extend .display-block;
+  max-width: 90%;
+  margin: 1em auto;
+  box-shadow: 1px 1px 1px #ccc;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend .font-weight-normal;
+}
+h4 {
+  @extend .font-size_20px;
+}
+h5 {
+  @extend .font-size_18px;
+}
+h6 {
+  @extend .font-size_16px;
+}
+code {
+  @extend .display-inlineBlock;
+  padding: 0 .3em;
+  margin: 0 .3em;
+  @extend .text-indent-none;
+  line-height: 1.4;
+  color: $code-color;
+  background-color: $code-background-color;
+  @extend .border-radius_3px;
+}
+ul,
+ol {
+  padding-left: 1.5em;
+}
+li {
+  line-height: 1.5;
+}
+li p {
+  @extend .text-indent-none;
+}
+& > .highlight {
+  margin-left: 0 !important;
+}
+
+blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
+  color: $blockquote-color;
+  background-color: $blockquote-background-color;
+  border-left: .25em solid $blockquote-border-color;
+}
+blockquote > p {
+  padding: 1em;
+  @extend .margin_0;
+}
+
+table {
+  max-width: 100%;
+  margin: 1em 0;
+  border-collapse: collapse;
+}
+thead {
+  @extend .color-fff;
+  @extend .background-color-19f;
+}
+th,
+td {
+  font-size: 1em;
+  padding: .5em 1em;
+}
+tbody {
+  background-color: #f8f5ec;
+}
+
+.video,
+video {
+  @extend .z-index_1;
+  @extend .display-block;
+  max-width: 100%;
+  @extend .margin-auto;
+}
+.youku {
+  width: 500px;
+  height: 500px;
+}
+.headerlink::before {
+  content: "\e62f";
+  vertical-align: -.05em;
+  margin-right: .2em;
+  font-family: "iconfont";
+}
+.highlight {
+  @extend .display-block;
+  max-height: 600px;
+  margin: 1em 0 1em -1em;
+  overflow: auto;
+
+  @import "./_highlight";
+}
+.highlight table {
+  margin: 0;
+}
