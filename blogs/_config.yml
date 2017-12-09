@@ -78,7 +78,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-sam
+theme: hexo-theme-next-master 
+#hexo-theme-next-master
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -87,6 +88,10 @@ deploy:
   repo:
     github: git@github.com:secondtonone1/secondtonone1.github.io.git,master
 
+duoshuo:
+  enable: true
+  shortname: your-duoshuo-shortname    
+    
 #new my theme
 jsonContent:
   meta: false
