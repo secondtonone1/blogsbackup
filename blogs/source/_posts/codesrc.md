@@ -12,6 +12,8 @@ C++ 教程网大并发服务器：
 链接: [达内C++学习](https://pan.baidu.com/s/1o8f0gKM) 密码: bwj7
 轩辕LinuxC：
 链接: [轩辕LinuxC](https://pan.baidu.com/s/1ci6y1S) 密码: 62nt
+自己总结的python源码和demo：
+链接：[python例子和源码](https://github.com/secondtonone1/python-)
 <!--more-->
 
 更多资源请关注微信公众号：
