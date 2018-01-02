@@ -119,8 +119,8 @@ app.master.title('Hello World')
 # 主消息循环:
 app.mainloop()
 ```
-pack()方法是将Widgets对象加载到父容器中。具体的API读者可以查看手册。这些第三方库
-用到的时候再具体学习即可。
+pack()方法是将Widgets对象加载到父容器中。
+具体的API读者可以查看手册。这些第三方库用到的时候再具体学习即可。
 
 
 
