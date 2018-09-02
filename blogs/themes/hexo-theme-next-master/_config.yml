@@ -47,6 +47,9 @@ footer:
   # -------------------------------------------------------------
   # Hexo link (Powered by Hexo).
   powered: true
+  
+  # visitors count
+  counter: true 
 
   theme:
     # Theme & scheme info link (Theme - NexT.scheme).
