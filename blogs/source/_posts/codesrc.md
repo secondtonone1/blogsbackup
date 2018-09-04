@@ -14,6 +14,18 @@ C++ 教程网大并发服务器：
 链接: [轩辕LinuxC](https://pan.baidu.com/s/1ci6y1S) 密码: 62nt
 自己总结的python源码和demo：
 链接：[python例子和源码](https://github.com/secondtonone1/python-)
+精品电子书
+链接: [精品电子书](https://pan.baidu.com/s/19A30zrd8k6YcmdvBJEqqYA) 密码: 7bd5
+python3.6爬虫最细教程
+链接: [python3.6爬虫最细教程](https://pan.baidu.com/s/1wa96NZIGlaFu9p8w2G1glA) 密码: ct27
+区块链2018教程
+链接: [区块链2018教程](https://pan.baidu.com/s/1PpMLreP440V_YWK6xkrnDQ) 密码: dqk5
+基于epoll，select模型封装的服务器模型
+链接: [基于epoll，select模型封装的服务器模型](https://github.com/secondtonone1/betternet)
+基于libevent网络库封装的服务器模型
+链接: [基于libevent网络库封装的服务器模型](https://github.com/secondtonone1/smartserver)
+基于boost::asio 封装的异步通信网络模型
+链接: [基于boost::asio 封装的异步通信网络模型](https://github.com/secondtonone1/boostserver)
 <!--more-->
 
 更多资源请关注微信公众号：
