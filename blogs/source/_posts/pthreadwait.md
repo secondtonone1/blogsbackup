@@ -112,7 +112,7 @@ pthread_cond_wait 返回时，mutex又被上锁了。
 
 `pthread_mutex_lock(&mutex);`
 
-`if(条件不满足)`
+`while或if(条件不满足)`
 
 　　`pthread_cond_wait(&cond, &mutex);`
 
@@ -177,7 +177,7 @@ void * consumer(void * arg)
 
     pthread_mutex_lock(&mutex);
     //当条件不满足时等待
-    if(count <= 0)
+    while(count <= 0)
     {
         cout << "begin wait" << endl;
         pthread_cond_wait(&cond,&mutex);
@@ -262,7 +262,7 @@ void * consumer(void * arg)
 
         pthread_mutex_lock(&mutex);
 
-        if(count <= 0)
+        while(count <= 0)
         {
             cout << "begin wait" << endl;
             pthread_cond_wait(&cond,&mutex);
