@@ -32,8 +32,8 @@ struct block_header_with_merkle_path：
 
 struct action_receipt :
 表示一个action的收据，包括接受者，摘要信息，授权顺序，接受顺序，编码顺序等。
-用UML图表示上述各类之间关系
-![1.jpg][1.jpg]
+用UML图表示上述各类之间关系:
+![1.jpg](1.jpg)
 
 ## 核心api解析
 ``` cpp
