@@ -39,7 +39,7 @@ GOBIN目录是执行 go install 后生成可执行文件的目录
 然后将两个路径导入到PATH中。
 
 ## 5 编写代码测试
-在goProject下src文件夹里，创建两个文件夹，分别是calcsrc和src，在calcsrc中创建calc.go文件，源码如下
+在goProject下src文件夹里，创建两个文件夹，分别是calcsrc和simplemath，在calcsrc中创建calc.go文件，源码如下
 ``` golang
 package main
 import "os"// 用于获得命令行参数os.Args
@@ -87,7 +87,23 @@ func main() {
     }
 }
 ```
-
+在simplemath文件加下分别创建add.go和sqrt.go
+add.go
+``` golang
+package simplemath
+func Add(a int, b int) int {
+    return a + b
+}
+```
+sqrt.go
+``` golang
+package simplemath
+import "math"
+func Sqrt(i int) int {
+    v := math.Sqrt(float64(i))
+    return int(v)
+}
+```
 ## 6 编译并运行程序
 可以在/home/secondtonone/goproject/src/calcsrc文件夹下执行go build calc.go，
 该文件夹下生成calc可执行文件，然后运行./calc add 2 3  可以看到结果
