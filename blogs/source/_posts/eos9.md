@@ -1,5 +1,5 @@
 ---
-title: eocs源码剖析之controller
+title: eos源码剖析之controller
 date: 2019-04-09 11:01:39
 categories: 技术开发
 tags: [区块链eos]
@@ -96,6 +96,7 @@ void controller::push_block( std::future<block_state_ptr>& block_state_future ) 
 ```
 在push_block中发送了pre_accepted_block信号
 插件捕捉处理： chain_plugin连接该信号，在plugin_initialize中绑定了信号的处理
+但是该channel没有订阅者。
 ``` cpp
 // relay signals to channels
       my->pre_accepted_block_connection = my->chain->pre_accepted_block.connect([this](const signed_block_ptr& blk) {
@@ -127,7 +128,35 @@ void commit_block( bool add_to_fork_db ) {
 ```
 add_to_fork_db为true,将_pending_block_state->validated设置为true,_pending_block_state放入fork_db,然后发送accepted_block_header
 
-发射时机2： push_block函数，pre_accepted_block发射完以后，获取区块的可信状态并添加至fork_db，然后发射该信号，携带fork_db添加成功后返回的状态区块。
+发射时机2： push_block函数，获取区块的可信状态,发射完pre_accepted_block以后，添加可信状态至fork_db，然后发射accepted_block_header信号，携带fork_db添加成功后返回的状态区块。
 
-插件捕捉处理1： net_plugin连接该信号，绑定处理函数，函数体实现了日志打印。
-插件捕捉处理2： chain_plugin连接该信号，由信号槽转播到channel，accepted_block_header_channel发布该区块。bnet_plugin订阅该channel，绑定bnet_plugin_impl的on_accepted_block_header函数，该函数涉及到线程池等概念，将会在bnet_plugin插件的部分详细分析。遍历线程池，转到session会话下的on_accepted_block_header函数执行。如果传入区块与本地时间相差6秒以内则接收，之外不处理。接收处理时先从本地多索引库表block_status中查找是否已存在，不存在则插入block_status结构对象，如果不是远程不可逆请求以及不存在该区块，或者该区块不是来自其他节点的情况，要在区块头通知集合中插入该区块id。
+插件捕捉处理： chain_plugin连接该信号，由信号槽转播到channel，accepted_block_header_channel发布该区块。bnet_plugin订阅该channel，绑定bnet_plugin_impl的on_accepted_block_header函数，该函数涉及到线程池等概念，将会在bnet_plugin插件的部分详细分析。遍历线程池，转到session会话下的on_accepted_block_header函数执行。如果传入区块与本地时间相差6秒以内则接收，之外不处理。接收处理时先从本地多索引库表block_status中查找是否已存在，不存在则插入block_status结构对象，如果不是远程不可逆请求以及不存在该区块，或者该区块不是来自其他节点的情况，要在区块头通知集合中插入该区块id。
+
+bnet_plugin订阅该信号，绑定处理函数，函数体实现了日志打印。
+``` cpp
+my->_on_accepted_block_header_handle = app().get_channel<channels::accepted_block_header>()
+                                         .subscribe( [this]( block_state_ptr s ){
+                                                my->on_accepted_block_header(s);
+                                         });
+```
+绑定了回调函数，回调函数内部调用bnet_plugin_impl的on_accepted_block_header(s);
+``` cpp
+void on_accepted_block_header( const block_state_ptr& s ) {
+           ...
+           const auto& id = s->id;
+           if( fc::time_point::now() - s->block->timestamp  < fc::seconds(6) ) {
+              auto itr = _block_status.find( id );
+              //_remote_request_irreversible_only(对端请求可逆)且(之前状态集合中没有该块或没收到过该块)
+              if( !_remote_request_irreversible_only && ( itr == _block_status.end() || !itr->received_from_peer ) ) {
+                 //加入通知集合，通知对方防止对方重复发送区块头
+                 _block_header_notices.insert( id );
+              }
+              //加入状态集合
+              if( itr == _block_status.end() ) {
+                 _block_status.insert( block_status(id, false, false) );
+              }
+           }
+        }
+```
+
+插件捕捉处理2： 
