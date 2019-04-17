@@ -130,15 +130,25 @@ add_to_fork_db为true,将_pending_block_state->validated设置为true,_pending_b
 
 发射时机2： push_block函数，获取区块的可信状态,发射完pre_accepted_block以后，添加可信状态至fork_db，然后发射accepted_block_header信号，携带fork_db添加成功后返回的状态区块。
 
-插件捕捉处理： chain_plugin连接该信号，由信号槽转播到channel，accepted_block_header_channel发布该区块。bnet_plugin订阅该channel，绑定bnet_plugin_impl的on_accepted_block_header函数，该函数涉及到线程池等概念，将会在bnet_plugin插件的部分详细分析。遍历线程池，转到session会话下的on_accepted_block_header函数执行。如果传入区块与本地时间相差6秒以内则接收，之外不处理。接收处理时先从本地多索引库表block_status中查找是否已存在，不存在则插入block_status结构对象，如果不是远程不可逆请求以及不存在该区块，或者该区块不是来自其他节点的情况，要在区块头通知集合中插入该区块id。
-
-bnet_plugin订阅该信号，绑定处理函数，函数体实现了日志打印。
+插件捕捉处理： chain_plugin连接该信号，
 ``` cpp
-my->_on_accepted_block_header_handle = app().get_channel<channels::accepted_block_header>()
+void chain_plugin::plugin_initialize(const variables_map& options) {
+my->accepted_block_header_connection = my->chain->accepted_block_header.connect(
+            [this]( const block_state_ptr& blk ) {
+               my->accepted_block_header_channel.publish( priority::medium, blk );
+            } );
+}
+```
+由信号槽转播到channel，accepted_block_header_channel发布该区块,bnet_plugin订阅该channel
+``` cpp
+void bnet_plugin::plugin_startup() {
+   my->_on_accepted_block_header_handle = app().get_channel<channels::accepted_block_header>()
                                          .subscribe( [this]( block_state_ptr s ){
                                                 my->on_accepted_block_header(s);
                                          });
+}
 ```
+
 绑定了回调函数，回调函数内部调用bnet_plugin_impl的on_accepted_block_header(s);
 ``` cpp
 void on_accepted_block_header( const block_state_ptr& s ) {
@@ -158,5 +168,131 @@ void on_accepted_block_header( const block_state_ptr& s ) {
            }
         }
 ```
+3. accepted_block
+发射时机: commit_block函数，fork_db以及重播的处理结束后，发射承认区块的信号，携带pending状态区块数据。
+插件捕捉处理
+1 net_plugin连接该信号，绑定处理函数，打印日志的同时调用dispatch_manager::bcast_block，传入区块数据。send_all向所有连接发送广播
+2 chain_plugin连接该信号，由信号槽转播到channel，accepted_block_channel发布该区块
+``` cpp
+void chain_plugin::plugin_initialize(const variables_map& options) {
+    my->accepted_block_connection = my->chain->accepted_block.connect( [this]( const block_state_ptr& blk ) {
+         my->accepted_block_channel.publish( priority::high, blk );
+      } );
+}
+```
+bnet_plugin订阅该channel
+``` cpp
+void bnet_plugin::plugin_startup() {
+      my->_on_accepted_block_handle = app().get_channel<channels::accepted_block>()
+                                         .subscribe( [this]( block_state_ptr s ){
+                                                my->on_accepted_block(s);
+                                         });
+}
+```
+``` cpp
+void on_accepted_block( const block_state_ptr& s ) {
+           verify_strand_in_this_thread(_strand, __func__, __LINE__);
+           const auto& id = s->id;
 
-插件捕捉处理2： 
+           _local_head_block_id = id;
+           _local_head_block_num = block_header::num_from_id(id);
+
+           if( _local_head_block_num < _last_sent_block_num ) {
+              _last_sent_block_num = _local_lib;
+              _last_sent_block_id  = _local_lib_id;
+           }
+
+           purge_transaction_cache();
+
+           for( const auto& receipt : s->block->transactions ) {
+              if( receipt.trx.which() == 1 ) {
+                 const auto& pt = receipt.trx.get<packed_transaction>();
+                 const auto& tid = pt.id();
+                 auto itr = _transaction_status.find( tid );
+                 if( itr != _transaction_status.end() )
+                    _transaction_status.erase(itr);
+              }
+           }
+
+           maybe_send_next_message(); /// attempt to send if we are idle
+        }
+```
+
+on_accepted_block函数，删除缓存中的所有事务，遍历接收到的区块的事务receipt，获得事务的打包对象，事务id，在多索引表_transaction_status中查找该id，如果找到了则删除。接下来如果在空闲状态下，尝试发送下一条pingpong心跳连接信息。
+3 mongo_db_plugin连接该信号，绑定其mongo_db_plugin_impl::accepted_block函数，传入区块内容。
+``` cpp
+my->accepted_block_connection.emplace( chain.accepted_block.connect( [&]( const chain::block_state_ptr& bs ) {
+            my->accepted_block( bs );
+         } ));
+```
+accepted_block_connection.emplace 插入信号连接器，当accepted_block从controller发出后，mongodb同样捕获到该信号，调用my->accepted_block( bs );
+
+插件捕捉处理④： producer_plugin连接该信号，执行其on_block函数，传入区块数据。
+``` cpp
+my->_accepted_block_connection.emplace(chain.accepted_block.connect( [this]( const auto& bsp ){ my->on_block( bsp ); } ));
+```
+on_block该函数主要是
+函数首先做了校验，包括时间是否大于最后签名区块的时间以及大于当前时间，还有区块号是否大于最后签名区块号。校验通过以后，活跃生产者账户集合active_producers开辟新空间，插入计划出块生产者。接下来利用set_intersection取本地生产者与集合active_producers的交集(如果结果为空，说明本地生产者没有出块权利不属于活跃生产者的一份子)。
+将结果存入一个迭代器，迭代执行内部函数，如果交集生产者不等于接收区块的生产者，说明是校验别人生产的区块，如果是相等的不必做特殊处理。校验别人生产的区块，首先要在活跃生产者的key中找到匹配的key(本地生产者账户公钥)，否则说明该区块不是合法生产者签名抛弃不处理。接下来，获取本地生产者私钥，组装生产确认数据字段，包括区块id，区块摘要，生产者，签名。更新producer插件本地标志位_last_signed_block_time和_last_signed_block_num。最后发射信号confirmed_block，携带以上组装好的数据。但经过搜索，项目中目前没有对该信号设置槽connection。在区块创建之前要为该区块的生产者设置水印用来标示该区块的生产者是谁。
+
+4. irreversible_block
+发射时机
+on_irreversible函数，更改区块状态为irreversible的函数，操作成功最后发射该信号。
+插件捕捉处理
+``` cpp
+ my->irreversible_block_connection = my->chain->irreversible_block.connect( [this]( const block_state_ptr& blk ) {
+         my->irreversible_block_channel.publish( priority::low, blk );
+      } );
+```
+chain_plugin连接该信号，由信号槽转播到channel,irreversible_block_channel发布该区块。bnet_plugin订阅该channel，
+``` cpp
+my->_on_irb_handle = app().get_channel<channels::irreversible_block>()
+                                .subscribe( [this]( block_state_ptr s ){
+                                       my->on_irreversible_block(s);
+                                });
+```
+依然线程池遍历会话，执行on_new_lib函数，当本地库领先时可以清除历史直到满足当前库，或者直到最后一个被远端节点所知道的区块。最后如果空闲，尝试发送下一条pingpong心跳连接信息。
+3 mongo_db_plugin连接该信号，执行applied_irreversible_block函数，仍旧参照mongo配置项的值决定是否储存区块、状态区块以及事务数据，然后将区块数据塞入队列等待消费。
+4 producer_plugin连接该信号，绑定执行函数on_irreversible_block，设置producer成员_irreversible_block_time的值为区块的时间。
+
+5. accepted_transaction
+
+发射时机： 
+1 push_scheduled_transaction函数，推送计划事务时，将事务体经过一系列转型以及校验，接着发射该信号，承认事务。
+2 push_transaction函数，新事务到大状态区块，要经过身份认证以及决定是否现在执行还是延期执行，最后要插入到pending区块的receipt接收事务中去。当检查事务未被承认时，发射一次该信号。最后全部函数处理完毕，再次发射该信号。
+插件捕捉处理
+1 chain_plugin连接该信号，由信号槽转播到channel，accepted_transaction_channel发布该事务。
+``` cpp
+my->accepted_transaction_connection = my->chain->accepted_transaction.connect(
+            [this]( const transaction_metadata_ptr& meta ) {
+               my->accepted_transaction_channel.publish( priority::low, meta );
+            } );
+```
+bnet_plugin订阅该channel，线程池遍历会话，执行函数on_accepted_transaction。
+``` cpp
+ my->_on_appled_trx_handle = app().get_channel<channels::accepted_transaction>()
+                                .subscribe( [this]( transaction_metadata_ptr t ){
+                                       my->on_accepted_transaction(t);
+                                });
+```
+在可能是多个的投机块中一个事务被承认，当一个区块包含该承认事务或者切换分叉时，该事务状态变为“receive now”，被添加至数据库表中，作为发送给其他节点的证据。当该事务被发送给其他节点时，根据这个状态可以保证之后不会重复发送。每一次事务被“accepted”，都会延时5秒钟。每次一个区块被应用，所有超过5秒未被应用的但被承认的事务都将被清除。
+2 mongo_db_plugin连接该信号，执行函数accepted_transaction，校验加入队列待消费。
+
+6. applied_transaction
+
+发射时机
+1 push_scheduled_transaction函数，事务过期时间小于pending区块时间处理后发射该信号。反之大于等于处理后发射该信号。当事务的sender发送者不为空且没有主观失败的处理后发射该信号。基于生产和校验的主观修改，主观处理后发射该信号，非主观处理发射该信号。
+2 push_transaction函数，发射两次该信号，逻辑较多，这段包括以上那个函数的可读性很差，注释几乎没有。
+插件捕捉处理
+1 net_plugin连接该信号，绑定函数applied_transaction，打印日志。
+2 chain_plugin连接该信号，由信号槽转播到channel，原理基本同上，不再重复。
+3 mongo_db_plugin同上。
+
+7. accepted_confirmation
+
+发射时机： 
+1 push_confirmation函数，推送确认信息，在此阶段不允许有pending区块存在，接着fork_db添加确认信息，发射该信号。
+插件捕捉处理
+2 net_plugin连接该信号，绑定函数accepted_confirmation，打印日志。
+插件捕捉处理
+1： chain_plugin连接该信号，由信号槽转播到channel，基本同上。
