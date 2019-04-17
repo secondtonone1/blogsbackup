@@ -87,7 +87,68 @@ app().get_channel<incoming::channels::transaction>().publish(p);
 8 递归调用schedule_production_loop
 ## 区块同步过程
 1 参考区块生产过程，producer_plugin循环生产区块，先start_block处理BFT签名并确定不可逆的区块数，之后produce_block调用controller
-2 controller使用finalize_block计算merkle root，使用commit_block提交到fork database中，fork db会依据1中计算的不可逆区块数，将不可逆的区块删除，并发送irreversible消息,controller绑定了该消息处理的回调函数
+2 controller使用finalize_block计算merkle root，使用commit_block提交到fork database中，
+只截取commit_block部分代码
+``` cpp
+void commit_block( bool add_to_fork_db ) {
+      try {
+         //判断是否加入fork_db中
+         if (add_to_fork_db) {
+            pending->_pending_block_state->validated = true;
+            auto new_bsp = fork_db.add(pending->_pending_block_state, true);
+            emit(self.accepted_block_header, pending->_pending_block_state);
+            head = fork_db.head();
+            EOS_ASSERT(new_bsp == head, fork_database_exception, "committed block did not become the new head in fork database");
+         }
+
+         emit( self.accepted_block, pending->_pending_block_state );
+         emit( self.accepted_block_with_action_digests,
+            std::make_shared<block_state_with_action_digests>(pending->_pending_block_state, pending->_action_digests) );
+      } catch (...) {
+         //....
+      }
+   }
+```
+实际上controller的commit_block做了几件事
+``` cpp
+1 设置pending_block_state为有效的
+2 调用fork_db 的add函数，携带pending_block_state并通过引用返回，函数返回值为一个新的block_state_ptr
+3 发送accepted_block_header信号
+4 发送accepted_block 和 accepted_block_with_action_digests信号
+```
+下面展开fork_db的add函数
+``` cpp
+ block_state_ptr fork_database::add( const block_state_ptr& n, bool skip_validate_previous ) {
+      //取出不可逆头
+      my->head = *my->index.get<by_lib_block_num>().begin();
+      auto lib    = my->head->dpos_irreversible_blocknum;
+      auto oldest = *my->index.get<by_block_num>().begin();
+      if( oldest->block_num < lib ) {
+         prune( oldest );
+      }
+      return n;
+   }
+```
+fork db会依据start_block中计算的不可逆区块数，将不可逆的区块删除(调用prune)，
+``` cpp
+void fork_database::prune( const block_state_ptr& h ) {
+      auto itr = my->index.find( h->id );
+      if( itr != my->index.end() ) {
+         //发送不可逆信号，controller绑定了回调处理
+         irreversible(*itr);
+         my->index.erase(itr);
+      }
+      auto& numidx = my->index.get<by_block_num>();
+      auto nitr = numidx.lower_bound( num );
+      while( nitr != numidx.end() && (*nitr)->block_num == num ) {
+         auto itr_to_remove = nitr;
+         ++nitr;
+         auto id = (*itr_to_remove)->id;
+         remove( id );
+      }
+   }
+```
+并发送irreversible消息,controller绑定了该消息处理的回调函数
 ``` cpp
 fork_db.irreversible.connect( [&]( auto b ) {
                                  on_irreversible(b);
