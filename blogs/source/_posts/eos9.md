@@ -14,7 +14,30 @@ incomplete = 3，这是一个未完成的区块，未被生产者签名也没有
 apply_context,应用上下文，处理节点应用区块的上下文环境，其中包含了迭代器缓存iterator_cache<key_value_object>
 transaction_context，事务上下文环境。包括controller，db的session，signed_transaction等。
 mutable_db()，返回一个chainbase::database的引用
-controller_impl结构体的实例的唯一指针my。controller核心功能都是通过impl实现调用的。从fork_db比如获取区块信息
+controller_impl结构体的实例的唯一指针my。controller核心功能都是通过impl实现调用的。
+``` cpp
+struct controller_impl {
+   controller&                    self;
+   chainbase::database            db;       // 用于存储已执行的区块，这些区块可以回滚，一旦提交就成了不可逆的区块
+   chainbase::database            reversible_blocks; ///< a special database to persist blocks that have successfully been applied but are still reversible
+   block_log                      blog;
+   optional<pending_state>        pending;  // 尚未出的块
+   block_state_ptr                head;     // 当前区块的状态
+   fork_database                  fork_db;  // 用于存储可分叉区块的数据库，可分叉的区块都放到这里
+   wasm_interface                 wasmif;   // wasm虚拟机的runtime
+   resource_limits_manager        resource_limits;  // 资源管理
+   authorization_manager          authorization;    // 权限管理
+   controller::config             conf;
+   chain_id_type                  chain_id;
+   bool                           replaying = false;
+   bool                           in_trx_requiring_checks = false; ///< if true, checks that are normally skipped on replay (e.g. auth checks) cannot be skipped
+}
+```
+controller_impl 几个重要的成员
+db用于存储已执行的区块，这些区块可以回滚，一旦提交就不可逆
+reversible_blocks用于存储已执行，但是这些区块是可逆的
+pending用于存放当前正在生产或者验证（收到）的区块
+fork_db用于存放所有区块（包括自己生产和收到的），这些区块链是可分叉的
 <!--more-->
 ## controller的信号
 controller 包括了以下几个信号：
@@ -275,7 +298,33 @@ bnet_plugin订阅该channel，线程池遍历会话，执行函数on_accepted_tr
                                        my->on_accepted_transaction(t);
                                 });
 ```
-在可能是多个的投机块中一个事务被承认，当一个区块包含该承认事务或者切换分叉时，该事务状态变为“receive now”，被添加至数据库表中，作为发送给其他节点的证据。当该事务被发送给其他节点时，根据这个状态可以保证之后不会重复发送。每一次事务被“accepted”，都会延时5秒钟。每次一个区块被应用，所有超过5秒未被应用的但被承认的事务都将被清除。
+``` cpp
+void on_accepted_transaction( transaction_metadata_ptr t ) {
+           auto itr = _transaction_status.find( t->id );
+           if( itr != _transaction_status.end() ) {
+              if( !itr->known_by_peer() ) {
+                 //对端未接受过该交易，修改过期时间
+                 _transaction_status.modify( itr, [&]( auto& stat ) {
+                    stat.expired = std::min<fc::time_point>( fc::time_point::now() + fc::seconds(5), t->packed_trx->expiration() );
+                 });
+              }
+              return;
+           }
+
+           transaction_status stat;
+           stat.received = fc::time_point::now();
+           //每一次事务被“accepted”，都会延时5秒钟。
+           //每次一个区块被应用，所有超过5秒未被应用的但被承认的事务都将被清除。
+           stat.expired  = stat.received + fc::seconds(5);
+           stat.id       = t->id;
+           stat.trx      = t;
+           //添加到multiindex中，用于判断是否发送过该交易，防止重复发送
+           _transaction_status.insert( stat );
+
+           maybe_send_next_message();
+        }
+```
+
 2 mongo_db_plugin连接该信号，执行函数accepted_transaction，校验加入队列待消费。
 
 6. applied_transaction

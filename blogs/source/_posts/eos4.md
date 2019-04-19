@@ -85,6 +85,9 @@ app().get_channel<incoming::channels::transaction>().publish(p);
 6 对区块签名
 7 提交区块到DB
 8 递归调用schedule_production_loop
+区块生产流程图
+![produce.png](produce.png)
+
 ## 区块同步过程
 1 参考区块生产过程，producer_plugin循环生产区块，先start_block处理BFT签名并确定不可逆的区块数，之后produce_block调用controller
 2 controller使用finalize_block计算merkle root，使用commit_block提交到fork database中，
@@ -187,6 +190,8 @@ void on( const signed_block_ptr& b ) {
 10 Controller调用apply_block判断如果新收到的block比原有的链长，则切换到新链上
 11 Controller调用finalize_block计算merkle root，使用commit_block提交到DB
 以上就是区块同步过程。
+区块同步流程图
+![push.png](push.png)
 感谢关注我的公众号
 ![1.jpg](1.jpg)
 
