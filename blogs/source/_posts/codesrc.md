@@ -26,6 +26,10 @@ python3.6爬虫最细教程
 链接: [基于libevent网络库封装的服务器模型](https://github.com/secondtonone1/smartserver)
 基于boost::asio 封装的异步通信网络模型
 链接: [基于boost::asio 封装的异步通信网络模型](https://github.com/secondtonone1/boostserver)
+Go 封装的tcp框架，同时集成了websocket，http等。
+链接: [golang实现的tcp框架wentby](https://github.com/secondtonone1/wentby)
+Go 基于wentby框架封装的游戏服务器wentserver
+链接: [golang实现游戏服务器wentserver](https://github.com/secondtonone1/wentserver)
 <!--more-->
 
 更多资源请关注微信公众号：
