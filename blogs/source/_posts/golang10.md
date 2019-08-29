@@ -21,6 +21,7 @@ initial-cluster: etcd01=http://127.0.0.1:2380,etcd02=http://127.0.0.1:2381,etcd0
 initial-cluster-state: new
 ```
 <!--more-->
+
 各参数含义:
 ``` cmd
 etcd  命令含义
