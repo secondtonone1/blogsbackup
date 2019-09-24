@@ -1,7 +1,7 @@
 ---
 title: Linux环境编译动态库和静态库总结
 date: 2017-08-08 21:08:58
-categories: 技术开发
+categories: [Linux]
 tags: [Linux环境编程]
 ---
 对Linux环境动态库和静态库的一些基础知识做一些总结，

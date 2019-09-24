@@ -1,7 +1,7 @@
 ---
 title: python学习(23)requests库爬取猫眼电影
 date: 2018-11-11 20:26:35
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 本文介绍如何结合前面讲解的基本知识，采用requests，正则表达式，cookies结合起来，做一次实战，抓取猫眼电影排名信息。

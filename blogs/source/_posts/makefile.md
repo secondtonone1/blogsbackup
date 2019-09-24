@@ -1,7 +1,7 @@
 ---
 title: makefile学习笔记
 date: 2017-08-12 10:54:02
-categories: 技术开发
+categories: [Linux]
 tags: [Linux环境编程]
 ---
 之前都是手动编译的，最近也学了下`makefile`相关的知识，文件结构是这样的在server文件夹里有eventloop.h,eventloop.cpp, networking.h, networking.cpp,

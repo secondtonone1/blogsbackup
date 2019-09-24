@@ -1,7 +1,7 @@
 ---
 title: 汇编语言学习笔记(一)
 date: 2017-08-12 11:18:46
-categories: 技术开发
+categories: [汇编]
 tags: [汇编]
 ---
 ## 一：变量类型

@@ -1,7 +1,7 @@
 ---
 title: python学习(十六)写爬虫获取糗事百科段子
 date: 2017-12-19 19:04:33
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 利用前面学到的文件、正则表达式、urllib的知识，综合运用，爬取糗事百科的段子

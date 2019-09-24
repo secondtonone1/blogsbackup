@@ -1,7 +1,7 @@
 ---
 title: python学习(十五)内建模块
 date: 2017-12-19 10:42:20
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 

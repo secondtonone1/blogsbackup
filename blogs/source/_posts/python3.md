@@ -1,7 +1,7 @@
 ---
 title: python学习笔记(三)高级特性
 date: 2017-08-17 16:15:12
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 ## 一、`切片`

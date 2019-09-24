@@ -1,7 +1,7 @@
 ---
 title: Go(05)slice知识介绍和使用
 date: 2019-05-08 16:22:50
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 ## golang 的引用类型和内置类型变量

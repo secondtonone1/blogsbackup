@@ -1,7 +1,7 @@
 ---
 title: libevent学习文档(三)working with event
 date: 2017-08-04 18:23:33
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程,Linux环境编程]
 ---
 `Events` have similar lifecycles. Once you call a Libevent function to set up an event and associate it with an `event base`, it becomes initialized. At this point, you can add, which makes it pending in the base. When the event is pending, if the conditions that would trigger an event occur (e.g., its file descriptor changes state or its timeout expires), the event becomesactive, and its (user-provided) callback function is run. If the event is configured persistent, it remains pending. If it is not persistent, it stops being pending when its callback runs. You can make a pending event non-pending by deleting it, and you can add a non-pending event to make it pending again.

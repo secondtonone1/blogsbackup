@@ -1,7 +1,7 @@
 ---
 title: python学习(21) smtp发送邮件
 date: 2018-01-06 10:07:23
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 本文介绍python发送邮件模块smtplib以及相关MIME模块。

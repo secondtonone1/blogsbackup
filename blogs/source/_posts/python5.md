@@ -1,7 +1,7 @@
 ---
 title: python学习笔记(五) 200行实现2048小游戏
 date: 2017-08-21 11:31:28
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 用前文提到的基础知识，和网上流行的2048源码，用python实现该游戏。

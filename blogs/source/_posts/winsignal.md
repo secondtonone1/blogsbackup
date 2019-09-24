@@ -1,7 +1,7 @@
 ---
 title: windows环境下封装条件wait和signal
 date: 2017-08-03 17:46:34
-categories: 技术开发
+categories: [网络编程]
 tags: [C++,Windows环境编程]
 ---
 linux 环境有提供好的`pthread_cond_wait()` 和 `phread_signal()`、`pthread_broadcast()`windows需要自己封装，利用`semophore`控制线程等待和释放，先简单谈一下设计好后api该如何使用。假设我们封装好条件变量等待函数名字叫做`wait(Mutex& mutex)`，Mutex是之前我们封装的条件变量，文章最下边会给出这些文件的下载地址，在这里读者当做linux 的mutex即可。我们封装的释放函数为`signal()`,广播函数为`broadcast`。

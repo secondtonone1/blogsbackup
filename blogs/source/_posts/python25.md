@@ -1,7 +1,7 @@
 ---
 title: 'python学习(25) BeautifulSoup介绍和实战'
 date: 2018-11-18 19:42:13
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 BeautifulSoup是python的html解析库，处理html非常方便

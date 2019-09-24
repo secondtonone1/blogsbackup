@@ -1,7 +1,7 @@
 ---
 title: python学习(十八)爬虫中加入cookie
 date: 2017-12-25 11:00:37
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 前几篇文章介绍了urllib库基本使用和爬虫的简单应用，本文介绍如何通过`post`信息给网站，保存登陆后`cookie`，并用于请求有

@@ -1,7 +1,7 @@
 ---
 title: 对于redis框架的理解（二）
 date: 2017-08-07 16:22:07
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 之前梳理过`redis` main函数主体流程

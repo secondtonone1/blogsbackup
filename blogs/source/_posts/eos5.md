@@ -1,7 +1,7 @@
 ---
 title: EOCS框架概述和剖析
 date: 2019-02-10 12:28:52
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 ## 什么是EOCS？

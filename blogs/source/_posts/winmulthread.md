@@ -1,7 +1,7 @@
 ---
 title: windows多线程接口介绍和使用
 date: 2017-08-03 20:47:18
-categories: 技术开发
+categories: [网络编程]
 tags: [C++,Windows环境编程]
 ---
 ## 一`windows多线程`接口：

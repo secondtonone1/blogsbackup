@@ -1,7 +1,7 @@
 ---
 title: EOCS跨链核心技术内幕
 date: 2019-02-11 22:16:36
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 EOCS跨链技术的核心就是ICP模块，ICP即Inter Chain Protocol(跨链交互协议)，下面着重介绍ICP工作原理和实现细节。

@@ -1,7 +1,7 @@
 ---
 title: golang接口
 date: 2019-09-12 14:59:46
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 ## 接口简介

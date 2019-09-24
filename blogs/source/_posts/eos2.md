@@ -1,7 +1,7 @@
 ---
 title: eos节点启动源码分析
 date: 2019-01-22 14:02:07
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 在eos源码目录中programs/nodeos/main.cpp文件里，为节点启动的主函数

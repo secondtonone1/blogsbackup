@@ -1,7 +1,7 @@
 ---
 title: python学习(八)定制类和枚举
 date: 2017-08-31 15:39:49
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 

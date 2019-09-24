@@ -1,7 +1,7 @@
 ---
 title: python学习(十九)常见的第三方库
 date: 2017-12-28 11:00:37
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 介绍几个python中常见的第三方库.

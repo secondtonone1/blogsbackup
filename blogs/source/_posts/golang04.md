@@ -1,7 +1,7 @@
 ---
 title: Go(04)Cobra命令行参数库的使用
 date: 2019-04-29 16:33:54
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 ## 下载和安装

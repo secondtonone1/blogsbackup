@@ -1,7 +1,7 @@
 ---
 title: python学习(十一)元类学习和应用
 date: 2017-09-20 16:35:11
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 最近学习了python的`错误处理`和几种`测试`方法

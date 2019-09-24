@@ -1,7 +1,7 @@
 ---
 title: golang 使用etcd
 date: 2019-08-29 16:40:47
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 ## etcd 安装和配置

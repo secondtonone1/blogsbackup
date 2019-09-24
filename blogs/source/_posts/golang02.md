@@ -1,7 +1,7 @@
 ---
 title: Go(02)windows环境搭建和vscode配置
 date: 2019-04-01 17:08:35
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 之前讲述过linux环境下Go语言开发环境搭建，这次简述下windows的搭建以及vscode配置

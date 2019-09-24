@@ -1,7 +1,7 @@
 ---
 title: libevlearn
 date: 2017-08-07 11:34:13
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 最近自学libevent事件驱动库，参考的资料为libevent2.2版本以及张亮提供的《Libevent源码深度剖析》，参考资料： [http://blog.csdn.net/sparkliang/article/details/4957667](http://blog.csdn.net/sparkliang/article/details/4957667), libevent好处之类的就不赘述了，libevent和libiop，redis等一样都是采用事件回调机制，这种模式被称作Reactor模式。正常事件处理流程是应用程序调用某个接口触发某个功能，而Reactor模式需要我们将这些接口和宿主指针（谁调用这些接口）注册在Reactor，在合适的时机Reactor使用宿主指针调用注册好的回调函数。

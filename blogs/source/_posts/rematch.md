@@ -1,7 +1,7 @@
 ---
 title: python学习(十四) 正则表达式
 date: 2017-12-12 16:45:18
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 ## 什么是正则表达式

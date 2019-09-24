@@ -1,7 +1,7 @@
 ---
 title: golang 函数介绍
 date: 2019-09-11 14:50:45
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 ## 函数简介

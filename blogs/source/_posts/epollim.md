@@ -1,7 +1,7 @@
 ---
 title: epoll的一些细节和注意事项
 date: 2017-08-07 12:13:53
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 `epoll_event结构`

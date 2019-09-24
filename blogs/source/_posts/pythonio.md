@@ -1,7 +1,7 @@
 ---
 title: python文件读写和序列化
 date: 2017-11-14 15:47:51
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 python 文件读写和序列化学习。

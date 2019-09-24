@@ -1,7 +1,7 @@
 ---
 title: libevent文档学习(一)多线程接口和使用
 date: 2017-08-07 10:44:51
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程,Linux环境编程]
 ---
 参考libevent官方提供的文档： [http://www.wangafu.net/~nickm/libevent-book/Ref1_libsetup.html](http://www.wangafu.net/~nickm/libevent-book/Ref1_libsetup.html)

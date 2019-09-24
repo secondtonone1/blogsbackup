@@ -1,7 +1,7 @@
 ---
 title: python学习(20) 网络编程
 date: 2018-01-02 16:57:42
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 python 网络编程和基本的C语言编程一样，效率不是很高，如果为了封装通信库

@@ -1,7 +1,7 @@
 ---
 title: 网络编程学习方法和图书推荐
 date: 2017-08-04 16:38:00
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 ![5](networkbook/5.jpg)

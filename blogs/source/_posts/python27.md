@@ -1,7 +1,7 @@
 ---
 title: python学习(27) 利用selenium 抓取淘宝内衣秀
 date: 2019-01-04 17:52:48
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 selenium 是Web应用测试工具，可以利用selenium和python，以及chromedriver等工具实现一些动态加密网站的抓取。本文利用这些工具抓取淘宝内衣评价买家秀图片。

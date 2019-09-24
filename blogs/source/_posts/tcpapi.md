@@ -1,7 +1,7 @@
 ---
 title: TCP/IP地址格式转换API
 date: 2017-08-04 15:30:02
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 1、htonl ()和ntohl( )

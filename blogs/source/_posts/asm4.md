@@ -1,7 +1,7 @@
 ---
 title: 汇编语言学习笔记(四)
 date: 2017-08-14 11:12:30
-categories: 技术开发
+categories: [汇编]
 tags: [汇编]
 ---
 ## 十三 `过程`

@@ -1,7 +1,7 @@
 ---
 title: Libevent学习笔记(四) bufferevent 的 concepts and basics
 date: 2017-08-04 18:08:08
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程,Linux环境编程]
 ---
 `Bufferevents and evbuffers`

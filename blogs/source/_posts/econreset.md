@@ -1,7 +1,7 @@
 ---
 title: ECONNRESET和WSAECONNRESET怎么产生的以及如何避免
 date: 2017-08-04 17:02:28
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 `ECONNRESET`是linux环境网络编程产生的错误，错误码为104，

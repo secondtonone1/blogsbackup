@@ -1,7 +1,7 @@
 ---
 title: Libevent学习笔记(五) 根据例子学习bufferevent
 date: 2017-08-04 17:41:54
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程,Linux环境编程]
 ---
 libevent中提供了一个Hello-world.c 的例子，从这个例子可以学习libevent是如何使用bufferevent的。

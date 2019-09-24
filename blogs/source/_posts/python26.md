@@ -1,7 +1,7 @@
 ---
 title: 'python学习(26) 分析Ajax爬取今日头条cosplay美女'
 date: 2018-12-16 18:59:58
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 分析ajax请求格式，模拟发送http请求，从而获取网页代码，进而分析取出需要的数据和图片。这里分析ajax请求，获取cosplay美女图片。

@@ -1,7 +1,7 @@
 ---
 title: 'python学习(24) 使用Xpath解析并抓取美女图片'
 date: 2018-11-18 19:42:13
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 Xpath最初用来处理XML解析，同样适用于HTML文档处理。相比正则表达式更方便一些

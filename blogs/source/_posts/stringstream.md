@@ -1,7 +1,7 @@
 ---
 title: stringstream使用方法
 date: 2017-08-04 12:36:06
-categories: 技术开发
+categories: [C++]
 tags: [C++]
 ---
 C++ 有`stringstream`这个工具可以方便的进行数据类型的转换

@@ -1,7 +1,7 @@
 ---
 title: python自学笔记(一)
 date: 2017-08-16 16:09:08
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 我没学过`python`，通过网上和一些图书资料，自学并且记下笔记。

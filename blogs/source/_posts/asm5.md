@@ -1,7 +1,7 @@
 ---
 title: 汇编语言学习笔记(五)
 date: 2017-08-15 15:39:31
-categories: 技术开发
+categories: [汇编]
 tags: [汇编]
 ---
 ## 十六、`数组`

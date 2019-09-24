@@ -1,7 +1,7 @@
 ---
 title: eos源码剖析之controller
 date: 2019-04-09 11:01:39
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 ## controller::block_status，区块状态枚举类，包括：

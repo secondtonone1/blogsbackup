@@ -1,7 +1,7 @@
 ---
 title: eos 源码net_plugin分析
 date: 2019-01-25 17:08:26
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 1  net_plugin_impl::connect(connection_ptr c) 函数用于解析地址，内部异步回调async_resolve

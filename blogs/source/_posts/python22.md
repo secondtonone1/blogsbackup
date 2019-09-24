@@ -1,7 +1,7 @@
 ---
 title: python学习(22)访问数据库
 date: 2018-01-11 18:23:02
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 本文介绍python如何使用数据库方面的知识。

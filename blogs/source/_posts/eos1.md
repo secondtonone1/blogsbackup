@@ -1,7 +1,7 @@
 ---
 title: eos源码分析和应用(一) 调试环境搭建
 date: 2018-09-02 08:28:43
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 eos基于区块链技术实现的开源引擎，开发人员可以基于该引擎开发DAPP(分布式应用)。下面搭建在windows环境下的虚拟机，并且安装eos引擎，以及配合vscode实现断点调试。

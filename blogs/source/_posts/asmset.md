@@ -1,7 +1,7 @@
 ---
 title: win7 64位环境下配置汇编环境和程序设计
 date: 2017-08-12 11:08:17
-categories: 技术开发
+categories: [汇编]
 tags: [汇编]
 ---
 下载`dosbox`，并解压安装

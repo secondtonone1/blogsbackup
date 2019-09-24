@@ -1,7 +1,7 @@
 ---
 title: Go(05)map介绍
 date: 2019-06-11 17:12:28
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 ## 基本用法 

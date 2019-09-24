@@ -1,7 +1,7 @@
 ---
 title: IO多路复用之epoll（二）
 date: 2017-08-07 17:18:23
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 前一篇介绍了`epoll的LT模式`，`LT模式注意epollout事件在数据全部写成功后需要取消关注`，或者更改为EPOLLIN。

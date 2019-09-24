@@ -1,7 +1,7 @@
 ---
 title: 简单的并发服务器（多个线程各自accept）
 date: 2017-08-07 16:49:17
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 基于之前讲述的简单循环服务器，做一个多个线程各自accept的服务器demo由于多个线程各自accept，容易造成数据错误，需要在accept前后枷锁

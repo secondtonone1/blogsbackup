@@ -1,7 +1,7 @@
 ---
 title: python自学笔记(二)
 date: 2017-08-17 15:07:01
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 通过前文介绍，大体上可以用学过的知识做一些东西了。

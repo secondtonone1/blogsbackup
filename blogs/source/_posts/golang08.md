@@ -1,7 +1,7 @@
 ---
 title: golang实现堆排序
 date: 2019-07-01 15:14:31
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 前文介绍了golang实现基本的四中排序，本文带领大家实现堆排序，堆排序是效率很高的算法，通过取出大根堆堆顶元素从而实现排序的算法。

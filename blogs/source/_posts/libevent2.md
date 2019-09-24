@@ -1,7 +1,7 @@
 ---
 title: libevent学习文档(二)eventbase相关接口和参数
 date: 2017-08-07 10:40:02
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程,Linux环境编程]
 ---
 Setting up a default event_base

@@ -1,7 +1,7 @@
 ---
 title: python学习(十三)进程和线程
 date: 2017-11-29 18:22:25
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 python多进程

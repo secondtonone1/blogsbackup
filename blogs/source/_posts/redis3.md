@@ -1,7 +1,7 @@
 ---
 title: 对于redis框架的理解(三)
 date: 2017-08-07 16:41:36
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 上一篇讲完了`initServer`的大体流程，其中`aeCreateEventLoop（）`,这个函数没有详细说明，我们在这一篇里讲述`Ae.h和Ae.c`, 这里面的api阐述了如何创建

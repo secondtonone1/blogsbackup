@@ -1,7 +1,7 @@
 ---
 title: golang结构体
 date: 2019-09-11 15:37:30
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 golang支持面向对象的设计，一般支持面向对象的语言都会有class的设计，但是golang没有class关键字，只有struct结构体。通过结构体达到类的效果，这叫做大成若缺，其用不弊。

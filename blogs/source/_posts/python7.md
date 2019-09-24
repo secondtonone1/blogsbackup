@@ -1,7 +1,7 @@
 ---
 title: python学习笔记(七) 类和pygame实现打飞机游戏
 date: 2017-08-22 11:33:08
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 python中`类声明`如下：

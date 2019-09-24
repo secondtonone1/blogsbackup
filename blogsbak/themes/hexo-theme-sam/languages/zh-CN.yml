@@ -1,0 +1,21 @@
+# 侧边栏菜单
+aside_menu:
+  home: 首页
+  archives: 所有文章
+  tags: 文章分类
+  links: 我和我的小伙伴
+  about: 作者简介
+  rss: RSS
+
+# 分页
+paginator:
+  prev: 上一页
+  next: 下一页
+
+# 页面标题
+title:
+  tags: 技能标签
+  categories: 文章分类
+  about: 作者简介
+  links: 我和我的小伙伴
+  archives: 目前共计文章

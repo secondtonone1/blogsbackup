@@ -1,7 +1,7 @@
 ---
 title: Windows互斥锁demo和分析
 date: 2017-08-03 20:36:08
-categories: 技术开发
+categories: [网络编程]
 tags: [C++,Windows环境编程]
 ---
 ## 一：windows创建锁接口

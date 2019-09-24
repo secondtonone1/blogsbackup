@@ -1,7 +1,7 @@
 ---
 title: python学习(九)网络编程学习--简易网站服务器
 date: 2017-09-05 15:39:49
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 python `网络编程`和其他语言都是一样的，服务器这块步骤为：

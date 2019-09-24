@@ -1,7 +1,7 @@
 ---
 title: 对于redis框架的理解（四）
 date: 2017-08-07 16:16:07
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 上一篇讲述了`eventloop`的结构和创建，添加文件事件删除文件事件，派发等等。

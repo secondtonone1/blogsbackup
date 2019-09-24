@@ -1,7 +1,7 @@
 ---
 title: pthread_cond_wait学习笔记
 date: 2017-08-08 20:49:06
-categories: 技术开发
+categories: [网络编程]
 tags: [Linux环境编程]
 ---
 近期学习了`线程等待`和`激活`的相关知识。

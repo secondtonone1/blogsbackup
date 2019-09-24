@@ -1,7 +1,7 @@
 ---
 title: Go(03)golang 基本变量和demo
 date: 2019-04-27 20:08:37
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 本文介绍基本的golang变量和简单的demo，该系列博文由浅入深，带领大家初入golang。

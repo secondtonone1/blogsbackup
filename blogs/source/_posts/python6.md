@@ -1,7 +1,7 @@
 ---
 title: python学习笔记(六) 函数式编程
 date: 2017-08-22 10:45:54
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 ## 一 `函数对象`

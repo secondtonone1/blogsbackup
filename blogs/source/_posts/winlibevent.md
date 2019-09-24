@@ -1,7 +1,7 @@
 ---
 title: windows环境libevent搭建和demo分析
 date: 2017-08-07 10:53:56
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 `libevent框架`之前有做过分析，这次是谈谈如何将libevent搭建在`vs工作环境下`，并且编写一个demo进行测试。测试过程中会再一次带大家分析消息是怎么传递的。我的libevent版本`libevent-2.0.22-stable`，用对应的vs命令工具进入该目录

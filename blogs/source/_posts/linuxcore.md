@@ -1,7 +1,7 @@
 ---
 title: Linux环境崩溃生成core文件以及调试
 date: 2017-08-07 17:45:05
-categories: 技术开发
+categories: [Linux]
 tags: [Linux环境编程]
 ---
 Windows环境崩溃问题可根据vs调试工具查看，Linux同样可以查看调用堆栈的信息，只是

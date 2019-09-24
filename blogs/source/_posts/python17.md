@@ -1,7 +1,7 @@
 ---
 title: 利用urllib库爬取MM图片
 date: 2017-12-22 12:54:49
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 这一篇巩固前几篇文章的学到的技术，利用urllib库爬取美女图片，其中采用了`多线程`，`文件读写`，

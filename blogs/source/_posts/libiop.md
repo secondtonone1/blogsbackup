@@ -1,7 +1,7 @@
 ---
 title: libiop通讯流程和api讲解
 date: 2017-08-07 12:51:49
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 上一篇讲到了`libiop基本结构`,这次根据libiop提供的test跟踪下消息和运行流程

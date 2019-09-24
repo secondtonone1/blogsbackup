@@ -1,7 +1,7 @@
 ---
 title: C++类成员空间分配和虚函数表
 date: 2017-08-03 14:46:34
-categories: 技术开发
+categories: C++
 tags: C++
 ---
 最近在自学python，看到继承和类，就顺便复习了C++的类和继承等方面的知识。  
@@ -54,7 +54,7 @@ DeriveA类继承了Base类，重写(覆盖)了虚函数display和func，并且�
     a.f1(3,5);    
 ```
 输出结果:
-![cppvirtual1](cppvirtual/cppvirtual1.png)
+![cppvirtual1](cppvirtual1.png)
 func函数在Base类中为虚函数，DeriveA继承Base后，根据多态机制实现了动态调用。所谓多态机制就是用基类指针指向子类对象，基类指针调用虚函数func，会动态调用实际的子类对象的func函数。由于display函数在Base类中为虚函数，所以不可以通过b->display()调用。由于DeriveA重新定义(redefining)了f1函数，f1函数参数类型修改了，所以只能使用a.f1(int,int)这种调用，而采用a.f1(string)或者采用a.f1(int)这种调用都会出错，编译阶段就会出错。因为DeriveA类对f1重新定义了，基类的f1函数不可通过对象直接调用。同样的道理对于基类指针或对象，无论基类指针指向子类还是基类对象，调用f1只能调用基类定义的两个f1(int)， f1(string)两个函数，  
 如果采用b->f1(3,5)，编译器在编译阶段就会提出错误。想实现子类对象调用基类的函数可在函数体内加上作用于Base::函数名(参数，...)
 DeriveA类修改f1函数，先调用基类的f1在调用自己的f1
@@ -81,20 +81,20 @@ public:
   
 打印输出a.f1(3,5);  
 结果如下：
-![cppvirtual2](cppvirtual/cppvirtual2.png)
+![cppvirtual2](cppvirtual2.png)
 先调用了基类的两个f1函数，之后调用DeriveA的f1函数
 下面调用如下函数
 b->exec();  
 a.exec();  
 结果如下：
-![cppvirtual3](cppvirtual/cppvirtual3.png)  
+![cppvirtual3](cppvirtual3.png)  
 为什么两个结果一样呢？  
 先看b->exec()；由于b是Base类型变量，那么调用的Base类的exec函数，exec函数内部调用Base类的display()和say() 函数。由于b为指向DeriveA类的基类指针，根据多态机制，调用Base类的display()函数时，会动态调用DeriveA类的display()函数。调用Base类的say()函数时，由于say()函数不是虚函数，所以不触发多态机制。  
 因此b->exec()函数的结果为调用DeriveA的display，调用Base的say函数。由于DeriveA类继承于Base类，但是没有实现自己的exec()函数，即没有实现重定义，那么当执行a.exec()时，调用的时Base类的exec()函数，原理和上边一样，调用Base类中的display()函数和say()函数，由于display()函数为虚函数，a为DeriveA类对象，调用基类的虚函数display()，根据多态机制，实际调用的是DeriveA类的display()函数。  
 执行下边代码  
 a.say()  
 结果如下：
-![4](cppvirtual/4.png)
+![4](4.png)
 下面修改DeriveA类的内容，在DeriveA类内部实现自己的exec()函数  
 ```cpp
 class DeriveA:public Base{
@@ -120,7 +120,7 @@ public:
 b->exec()；  
 a.exec():  
 结果如下:  
-![5](cppvirtual/5.png)
+![5](5.png)
 因为DeriveA类重定义了exec函数，那么a.exec()函数调用的是DeriveA类的exec()函数，从而调用的都是DeriveA类的display()和say()函数。  
 ## 继承类和基类成员函数调用规则总结：  
 DeriveA a;  
@@ -188,20 +188,20 @@ public:
     pFun();
 ```
 输出结果如下:  
-![6](cppvirtual/6.png)
+![6](6.png)
 可见类对象大小为8字节，4字节正好是指向虚函数表指针的大小。剩余4字节为成员变量a的大小。画个图示意虚函数表结构：  
-![7](cppvirtual/7.png)
+![7](7.png)
 p指向的就是类对象的首地址，同时也是虚函数表指针(指向虚函数表的指针)的地址，*p指向虚函数表，由于指针是4字节，(int *)(*p)虚函数表首地址，也是第一个函数指针的地址。  
 Derive类继承于Base类，但是没有覆盖(重写)Base类的虚函数，Derive d; 的虚函数表如下：  
-![8](cppvirtual/8.png)
+![8](8.png)
 Derive类继承于Base类，并且覆盖(重写)Base类的虚函数，Derive d; 的虚函数表如下：  
-![9](cppvirtual/9.png)
+![9](9.png)
 可以看到d的虚函数表中第一个单元为Derive::f()，覆盖了原有的Base::f()。  
 Derive d;  
 Base * p = &d;  
 p指向d的首地址，其实就是d的虚函数表指针的地址，p->f()实际会调用虚函数表中的Derive::f()，从而实现多态。  
 多重继承结构如下：
-![10](cppvirtual/10.png)
+![10](10.png)
 虚函数表原理后可以篡改部分程序功能，其实很多外挂就是钩子函数回调注入的。  
 ```cpp
 class Baseclass { 
@@ -231,7 +231,7 @@ Deriveclass d;
     pFunc();
 ```
 结果如下：  
-![11](cppvirtual/11.png)
+![11](11.png)
 ## C++类对象的大小为多大？
 `一个类中，虚函数、成员函数（包括静态与非静态）和静态数据成员都是不占用类对象的存储空间的。对象大小=   vptr(可能不止一个)   +   所有非静态数据成员大小   +   Aligin字节大小（依赖于不同的编译器对齐和补齐）`  
 定义几个类，然后输出他们大小。  
@@ -288,7 +288,7 @@ class E
     cout <<"e对象大小： " <<sizeof(e) <<endl;
 ```
 结果如下：  
- ![12](cppvirtual/12.png)  
+ ![12](12.png)  
 ## 类和结构体对象对齐和补齐原则？
 
 `对齐：类(结构体)对象每个成员分配内存的起始地址为其所占空间的整数倍。`  
@@ -327,13 +327,13 @@ H h;
 cout<<"h 对象大小： "<< sizeof(h)<<endl;
 ```
 结果：  
-![13](cppvirtual/13.png)  
+![13](13.png)  
 静态成员变量，虚函数和static成员函数都不会占用对象的空间，f大小为1,是因为要开辟一个字节保存对象标识信息。  
 g大小为4是开辟四字节给虚函数表指针。h大小为1字节也是开辟一个字节保存对象标识信息  
 ## 什么要采取对齐和补齐分配策略？
 
 这个要从计算机CPU存取指令说起，
-![14](cppvirtual/14.png) 
+![14](14.png) 
 每个字节单元为8bit，从地址0到地址3总共四个字节，为32bit。  
  class  A{
 
@@ -376,4 +376,4 @@ class C{
  如果采取对齐策略，那么地址0~3存储c.n，地址4~7存储c.m，cpu同样读取两次，但是仅需要组合就可以去除对象的所有数据。  
  这就是为什么存储数据需要采取对齐和补齐的策略。  
 到此为止C++虚函数和类成员的存储知识复习完，谢谢关注我的公众号： 
-![wxgzh](cppvirtual/wxgzh.jpg)  
+![wxgzh](wxgzh.jpg)  

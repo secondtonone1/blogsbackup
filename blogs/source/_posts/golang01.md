@@ -1,7 +1,7 @@
 ---
 title: golang(01) linux环境搭建和编码
 date: 2019-03-20 15:12:51
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 ## 1 在自己的工作目录下建立一个goproject文件夹

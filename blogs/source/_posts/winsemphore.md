@@ -1,7 +1,7 @@
 ---
 title: windows环境利用semophore机制进行线程同步
 date: 2017-08-03 18:23:28
-categories: 技术开发
+categories: [网络编程]
 tags: [C++,Windows环境编程]
 ---
 `semophore`是信号量的意思，常用于`PV操作`，所谓PV操作就是pend(等待，直到有资源可用，并且消耗资源)V就是释放资源。  

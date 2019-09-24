@@ -1,7 +1,7 @@
 ---
 title: select网络模型知识总结
 date: 2017-08-07 12:41:57
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 `select模型支持IO多路复用`，select函数如下

@@ -1,7 +1,7 @@
 ---
 title: 对于redis底层框架的理解（五）
 date: 2017-08-07 12:25:11
-categories: 技术开发
+categories: [网络编程] 
 tags: [网络编程]
 ---
 之前总结了redis的通讯流程，基本框架，epoll的封装等等，这次介绍下redis对于select模型的封装

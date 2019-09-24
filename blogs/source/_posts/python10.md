@@ -1,7 +1,7 @@
 ---
 title: python学习(十)元类学习和应用
 date: 2017-09-07 15:33:37
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 python 可以通过`type`函数创建类,也可通过type判断数据类型

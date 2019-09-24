@@ -1,7 +1,7 @@
 ---
 title: TCP粘包处理
 date: 2017-08-04 11:51:30
-categories: 技术开发
+categories: 网络编程
 tags: [C++,网络编程]
 ---
 `TCP`（transport control protocol，`传输控制协议`）是`面向连接`的，面向流的，提供高可靠性服务。收发两端（客户端和服务器端）都要有一一成对的socket，

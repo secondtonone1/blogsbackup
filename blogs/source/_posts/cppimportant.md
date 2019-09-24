@@ -1,7 +1,7 @@
 ---
 title: C++的一些注意事项
 date: 2017-08-04 10:37:25
-categories: 技术开发
+categories: C++
 tags: C++
 ---
 ## 一. C++`类的引用成员`，`类的常量成员`，`类的static成员`的初始化方式

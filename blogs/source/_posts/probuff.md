@@ -1,7 +1,7 @@
 ---
 title: Google protocol buffer的配置和使用(Linux&&Windows)
 date: 2017-08-04 11:15:30
-categories: 技术开发
+categories: [网络编程]
 tags: [C++,网络编程]
 ---
 最近自己的服务器做到`序列化`这一步了，在网上看了下，序列化的工具有`boost `和google的`protocol buffer`，protocol buffer的效率和使用程度更高效一些，就自己琢磨下把他加到自己的服务器里。所以这里我先弄一个小的demo去测试如何使用和配置protocol buffer。首先是windows 平台

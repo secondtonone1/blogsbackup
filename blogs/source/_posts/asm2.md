@@ -1,7 +1,7 @@
 ---
 title: 汇编语言学习笔记(二)
 date: 2017-08-12 12:04:04
-categories: 技术开发
+categories: [汇编]
 tags: [汇编]
 ---
 ## 六、选择结构

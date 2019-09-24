@@ -1,7 +1,7 @@
 ---
 title: eos交易同步过程和区块生产过程源码分析
 date: 2019-01-30 10:29:25
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 ## 交易同步过程

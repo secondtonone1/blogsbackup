@@ -1,7 +1,7 @@
 ---
 title: python学习笔记(四) 思考和准备
 date: 2017-08-21 10:46:53
-categories: 技术开发
+categories: [python]
 tags: [python]
 ---
 ## 一、zip的坑

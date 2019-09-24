@@ -1,7 +1,7 @@
 ---
 title: redis 配置和使用(C++)
 date: 2017-08-04 16:17:47
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程,Linux环境编程,C++]
 ---
 ## 一、Redis简介：

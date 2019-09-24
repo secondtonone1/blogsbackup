@@ -1,7 +1,7 @@
 ---
 title: 简单循环服务器
 date: 2017-08-07 16:57:52
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 客户端部分：

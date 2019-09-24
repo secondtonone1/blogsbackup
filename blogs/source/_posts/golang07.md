@@ -1,7 +1,7 @@
 ---
 title: golang实现四种排序(快速，冒泡，插入，选择)
 date: 2019-06-29 09:58:13
-categories: 技术开发
+categories: [golang]
 tags: [golang]
 ---
 前面已经介绍golang基本的语法和容器了，这一篇文章用golang实现四种排序算法,快速排序，插入排序，选择排序，冒泡排序。既可以总结前文的基础知识，又可以熟悉下golang如何实现这四种排序。

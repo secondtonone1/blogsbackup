@@ -1,7 +1,7 @@
 ---
 title: 基于epoll封装的事件回调miniserver
 date: 2017-08-07 17:06:12
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 `epoll`技术前两节已经阐述过了，目前主要做一下封装，很多epoll的服务器都是采用`事件回调`方式处理，

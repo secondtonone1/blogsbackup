@@ -1,7 +1,7 @@
 ---
 title: EOCS中继网络源码剖析
 date: 2019-02-17 20:47:03
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 EOCS中继网络实现了两种模式，分别是eoc模式和icp模式，今天先介绍eoc模式。

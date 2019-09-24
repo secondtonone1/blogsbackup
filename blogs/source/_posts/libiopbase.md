@@ -1,7 +1,7 @@
 ---
 title: libiop网络库数据结构和基础知识
 date: 2017-08-07 16:00:54
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 最近朋友推荐，学习了`libiop`这个网络库，作者封装的很全面，代码很简洁

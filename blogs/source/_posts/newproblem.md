@@ -1,7 +1,7 @@
 ---
 title: 网络编程一些常见问题总结
 date: 2017-08-04 17:19:14
-categories: 技术开发
+categories: [网络编程]
 tags: [网络编程]
 ---
 ## 1 设置网络socket非阻塞：

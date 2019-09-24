@@ -1,7 +1,7 @@
 ---
 title: grep命令学习和总结
 date: 2018-04-02 22:36:12
-categories: 技术开发
+categories: [Linux]
 tags: [shell]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: eocs跨链合约区块数据结构设计与实现
 date: 2019-03-15 12:01:47
-categories: 技术开发
+categories: [区块链]
 tags: [区块链eos]
 ---
 ## 核心数据结构分析
