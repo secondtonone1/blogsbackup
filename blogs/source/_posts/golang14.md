@@ -46,7 +46,7 @@ kind 表示类型的种类，如 bool、int、float、string、struct、interfac
 str 表示类型的名字信息，它是一个 nameOff(int32) 类型，通过这个 nameOff，可以找到类型的名字字符串
 
 eface结构总结图
-![1.jgp](1.jpg)
+![1.jpg](1.jpg)
 eface 分两个部分， *_type 类型为实际类型转化为type类型的指针，data为实际数据。
 ## 具体类型如何转化为eface
 我们写一段程序efacedemo.go，然后用gobuild命令生成可执行文件，再用汇编查看下源码。
