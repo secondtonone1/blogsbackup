@@ -8,7 +8,7 @@ tags: [新闻动态]
 ## 事件始末
 一个网易前员工，因为被检测出扩张型心肌病被网易提出单方面辞退，辞退原因是其绩效审核为D级，这位员工否认绩效审核结果，公司仍坚持辞退该员工，该员工要求索赔之后受到公司各种威胁以至于家人也受到牵连。具体事件在此处
 <!--more-->
-![https://mp.weixin.qq.com/s/FW7uR5t6UMMxgkCcAvk-MA](https://mp.weixin.qq.com/s/FW7uR5t6UMMxgkCcAvk-MA)
+[https://mp.weixin.qq.com/s/FW7uR5t6UMMxgkCcAvk-MA](https://mp.weixin.qq.com/s/FW7uR5t6UMMxgkCcAvk-MA)
 ## 网易道歉
 网易于11月25日及时发布道歉信
 ![1.jpg](1.jpg)
