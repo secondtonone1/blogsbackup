@@ -1,8 +1,8 @@
 ---
 title: 冬日清晨不愿起
 date: 2017-12-11 17:49:29
-categories: 点滴记录
-tags: [诗词原创]
+categories: 生活感悟
+tags: [生活感悟]
 ---
 
    《冬日清晨不愿起》

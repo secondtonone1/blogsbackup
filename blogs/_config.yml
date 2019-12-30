@@ -58,10 +58,7 @@ default_category: uncategorized
 category_map:
   Linux : tech
   资源共享: share
-  新闻动态: news
-  生活杂烩: life
-  点滴记录: diary
-  诗词创作: poetry
+  生活感悟: news
   golang : golang
   C++    : cpp
   网络编程 : netprogram
@@ -96,9 +93,9 @@ deploy:
   repo:
     github: git@github.com:secondtonone1/secondtonone1.github.io.git,master
 
-duoshuo:
-  enable: true
-  shortname: your-duoshuo-shortname    
+#duoshuo:
+#  enable: true
+#  shortname: your-duoshuo-shortname    
     
 #new my theme
 jsonContent:
@@ -129,3 +126,10 @@ favicon: /favicon.ico
 
 # 修改字体图标链接，用的是阿里的 iconfont
 fontface_url: //at.alicdn.com/t/font_pb2xepysv85gsyvi.css
+
+# 搜索页面
+search:
+    path: search.xml
+    field: post
+    format: html
+    limit: 10000
