@@ -138,4 +138,4 @@ type AppInfo struct {
 [https://github.com/secondtonone1/golang-/tree/master/logcatchsys](https://github.com/secondtonone1/golang-/tree/master/logcatchsys)
 感谢关注我的公众号
 ![wxgzh.jpg](wxgzh.jpg)
-个人微信号1017234088, 添加请注明来源。
+个人微信号1017234088, 添加请注明来源!
