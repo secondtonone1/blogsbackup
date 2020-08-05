@@ -100,3 +100,6 @@ echo "Hello, dk03" >> dk03.txt
 ```
 此时查看dk02， 可以看到/dockervolume2/container2文件夹下产生了dk03.txt，并且包含Hello, dk03文本
 此时启动dk01,  其/dockervolume2/container2文件夹下也会同步dk03.txt
+## 感谢关注公众号
+今天的笔记就这些吧，感谢关注公众号
+![wxgzh.jpg](wxgzh.jpg)
