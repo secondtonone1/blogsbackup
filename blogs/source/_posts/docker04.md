@@ -41,4 +41,89 @@ docker build -t mycentos:v1.0 .
 ## 启动容器
 docker run -it --name mycentosdk  2081f3e41884
 
+## ENTRYPOINT 案例
+entrypoint可以接收 命令行参数，从而达到组合命令的效果
+现在我们制作一个请求网页的镜像
+``` Dockerfile
+FROM centos
+RUN yum install -y curl
+ENTRYPOINT ["curl", "-s", "www.baidu.com" ]
+```
+接下来生成镜像
+``` cmd
+docker build -f ./Dockerfile -t ipcheck .
+``
+之后分别运行两个命令做对比
+``` cmd
+docker run --name ipcheck01 --rm ipcheck 
+```
+这个是进阶版本
+``` cmd
+docker run --name ipcheck02 --rm ipcheck -i
+```
+会分别看到不同的效果，-i 的启动方式会额外打印请求的头部信息。
 
+## ONBUILD 案例
+当子类镜像继承父类镜像时，ONBUILD会被执行,我们将上边的Dockerfile改进下
+``` Dockerfile
+FROM centos
+RUN yum install -y curl
+ENTRYPOINT ["curl", "-s", "www.baidu.com"]
+ONBUILD RUN echo "father images onbuild ..."
+```
+然后我们生成镜像
+``` cmd
+docker build -f ./Dockerfile01 -t fatherdk .
+```
+我们再写一个子类Dockerfile
+``` Dockerfile
+FROM fatherdk
+RUN yum install -y curl
+ENTRYPOINT ["curl", "-s", "www.baidu.com"]
+```
+我们生成一个子类镜像
+``` cmd
+docker build -f ./Dockerfile02 -t sondk .
+```
+可以看到构建子类镜像同时会触发父类镜像
+## 综合运用上述命令构造tomcat镜像
+先写一个Dockerfile 安装tomcat以及jdk
+``` Dockerfile
+FROM centos
+MAINTAINER zack<zack@126.com>
+#把宿主机当前上下文的c.txt拷贝到容器/usr/local/路径下
+COPY c.txt /usr/local/cincontainer.txt
+#把java与tomcat添加到容器中
+ADD jdk-8u144-linux-x64.tar.gz  /usr/local
+ADD  apache-tomcat-9.0.10.tar.gz /usr/local
+#安装vim 编辑器
+RUN yum -y install vim
+#设置工作访问时的WORKDIR路径，登录落脚点
+ENV MYPATH /usr/local
+WORKDIR $MYPATH
+#配置java与tomcat环境变量
+ENV JAVA_HOME   /usr/local/jdk1.8.0_144
+ENV CLASSPATH   $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+ENV CATALINA_HOME  /usr/local/apache-tomcat-9.0.10
+ENV CATALINA_BASE  /usr/local/apache-tomcat-9.0.10
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
+#容器运行时监听的端口
+EXPOSE 8080
+#启动时运行tomcat
+# ENTRYPOIINT ["/usr/local/apache-tomcat-9.0.10/bin/startup.sh" ]
+# CMD ["/usr/local/apache-tomcat-9.0.10/bin/catalina.sh", "run" ]
+CMD /usr/local/apache-tomcat-9.0.10/bin/startup.sh && tail -F /usr/local/apache-tomcat-9.0.10/logs/catalina.out
+```
+生成镜像
+``` Dockerfile
+docker build -t zacktomcat .
+```
+
+运行容器
+``` Dockerfile
+docker run -d -p 9080:8080 --name myt9 -v /home/zack/dockerwork/tomcat9/test:/usr/local/apache-tomcat-9.0.10/webapps/test -v /home/zack/dockerwork/tomcat9/tomcat9logs/:/usr/local/apache-tomcat-9.0.10/logs --privileged=true zacktomcat
+```
+在浏览器输入地址和端口9080就可以看到tomcat的首页了。
+## 感谢关注公众号
+今天的笔记就这些吧，感谢关注公众号
+![wxgzh.jpg](wxgzh.jpg)
