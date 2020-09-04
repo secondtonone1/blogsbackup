@@ -83,6 +83,96 @@ docker run -v /dbdata  --name  dbdata2 ubuntu /bin/bash
 ``` cmd
 docker run --volume-from dbdata2 -v $(pwd):/backup busybox tar xvf /backup/backup.tar
 ```
+## docker 设置ssh
+1 拉取ubuntu镜像
+``` cmd
+docker pull ubuntu:18.04
+```
+2 启动ubuntu容器,将22端口映射为1022端口
+``` cmd
+docker run -it  -p 1022:22  ubuntu:18.04
+```
+3 在容器中安装如下应用
+``` cmd
+apt-get update
+apt-get upgrade
+apt-get install vim
+apt-get install openssh-server
+apt-get install net-tools
+```
+然后vim /etc/ssh/sshd_config
+将PermitRootLogin设置为yes
+创建文件夹
+``` cmd
+mkdir -p /var/run/sshd
+```
+然后启动服务
+``` cmd
+/usr/sbin/sshd -D &
+```
+这时我们查看网路端口
+``` cmd
+netstat -tunpl
+```
+可以看到22端口启动了
+为了让容器启动时可以自启动ssh服务,我们实现一个脚本
+vim /run.sh添加如下
+``` sh
+#!/bin/bash
+/usr/sbin/sshd -D
+```
+然后赋予这个脚本执行权限
+``` cmd
+chmod +x /run.sh
+```
+然后exit退出，基于改造的docker提交新的镜像
+``` cmd
+docker commit cafd85cb0645 ubuntu:ssh
+```
+然后我们基于这个镜像启动新的容器
+``` cmd
+docker run  -d  --name ubuntu-ssh -p 1022:22 ca1a463f5c99 /run.sh
+```
+因为ssh登录需要账户名和密码，账户名为root，密码我们进入容器设置下
+``` cmd 
+docker exec -it 28afa8e39353 /bin/bash
+passwd
+```
+安装后输入passwd,设置密码.
+之后通过ssh连接就可以了
+``` cmd
+ssh root@172.98.23.45 -p 1022
+```
+## 通过Dockerfile设置
+``` cmd
+#设置继承镜像
+FROM ubuntu:18.04
+#提供一些作者的信息
+MAINTAINER from www.dockerpool.com by Aiden
+#下面开始运行命令，此处更改Ubuntu的源为国内163的源
+RUN echo "deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
+RUN apt-get update
+#安装ssh服务
+RUN apt-get install -y openssh-server
+RUN apt-get install -y net-tools
+RUN mkdir -p /var/run/sshd
+RUN mkdir -p /root/.ssh
+ADD run.sh /run.sh
+RUN chmod 755 /run.sh
+#开放端口
+EXPOSE 22
+#设置自启动命令
+CMD ["/run.sh"]
+```
+![wxgzh.jpg](wxgzh.jpg)
+
+
+
+
 
 
 
