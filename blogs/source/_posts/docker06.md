@@ -143,31 +143,7 @@ passwd
 ``` cmd
 ssh root@172.98.23.45 -p 1022
 ```
-## 通过Dockerfile设置
-``` cmd
-#设置继承镜像
-FROM ubuntu:18.04
-#提供一些作者的信息
-MAINTAINER from www.dockerpool.com by Aiden
-#下面开始运行命令，此处更改Ubuntu的源为国内163的源
-RUN echo "deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list
-RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list
-RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list
-RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list
-RUN echo "deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
-RUN apt-get update
-#安装ssh服务
-RUN apt-get install -y openssh-server
-RUN apt-get install -y net-tools
-RUN mkdir -p /var/run/sshd
-RUN mkdir -p /root/.ssh
-ADD run.sh /run.sh
-RUN chmod 755 /run.sh
-#开放端口
-EXPOSE 22
-#设置自启动命令
-CMD ["/run.sh"]
-```
+## 感谢关注我的公众号
 ![wxgzh.jpg](wxgzh.jpg)
 
 
