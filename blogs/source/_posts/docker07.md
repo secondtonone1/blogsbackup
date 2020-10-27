@@ -67,7 +67,7 @@ docker build -f Dockerfile -t cmd3 .
 ``` cmd
 docker run -it --rm  cmd3 /bin/bash
 ```
-可以看到容器启动后并没有执行/bin/bash命令，二是调用了ENTRYPOINT命令netstat
+可以看到容器启动后并没有执行/bin/bash命令，而是调用了ENTRYPOINT命令netstat
 ``` cmd
 Active Internet connections (w/o servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State      

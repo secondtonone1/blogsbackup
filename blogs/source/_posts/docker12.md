@@ -229,4 +229,4 @@ Hello Container World! I have been seen 10 times and my hostname is 77c3a5cff8d2
 Hello Container World! I have been seen 11 times and my hostname is c65d07e6ab79.
 ```
 ## 感谢关注我的公众号
- ![wxgzh.jpg](wxgzh.jpg)
+![wxgzh.jpg](wxgzh.jpg)
