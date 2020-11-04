@@ -1,7 +1,8 @@
 ---
 title: k8s最小调度单位pod
 date: 2020-10-26 20:46:13
-tags:
+categories: [docker]
+tags: [docker]
 ---
 pod是k8s调度最小单位，一个pod可以包含多个容器，各容器之间共享同一个网络。
 可以通过yml文件创建一个pod
