@@ -97,5 +97,96 @@ deployment支持热更新
 kubectl edit deployment service-test
 ```
 之后会显示deployment的yml信息，修改后保存，之后service-test就自动热更新了。无需重启服务。
+## NodePort 网络
+我们先实现一个nginx_pod.yml文件，定义Pod
+``` yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - name: nginx-port
+      containerPort: 80
+```
+定义了一个名字为nginx-pod的pod，labels的key为app，value为nginx。然后定义了容器的名字为nginx-container，镜像为nginx， 端口为80
+我们启动这个pod
+``` cmd
+kubectl create -f nginx_pod.yml
+```
+然后查看pod
+``` cmd
+kubectl get pods -o wide
+```
+接下来将pod导出service,选择类型NodePort
+``` cmd
+kubectl expose pods nginx-pod --type=NodePort
+```
+查看service信息
+```cmd
+kubectl get svc
+```
+可以看到nginx-pod这个服务的类型为NodePort
+``` cmd
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        2d2h
+nginx-pod    NodePort    10.104.141.197   <none>        80:31427/TCP   4m27s
+```
+我们通过任意一个节点的ip加上端口号31427即可访问nginx-pod的服务。查看节点信息
+``` cmd
+kubectl get node -o wide
+```
+可以看到节点信息
+``` cmd
+NAME       STATUS   ROLES    AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+zackhost   Ready    master   2d3h   v1.15.4   172.17.0.9    <none>        Ubuntu 18.04.5 LTS   4.15.0-88-generic   docker://19.3.6
+```
+172.17.0.9为内网IP，我通过外网ip和端口31427就可以访问。
+![1.png](1.png)
+## 通过yml文件创建svc
+我们先将之前创建的nginx的service删除
+``` cmd
+kubectl delete svc 
+```
+然后我们实现一个nginx的service的yml文件
+``` yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  ports:
+  - port: 32333
+    nodePort: 32334
+    targetPort: nginx-port
+    protocol: TCP
+  selector:
+    app: nginx
+  type: NodePort
+```
+targetPort指定的端口名字为nginx-port， selector指定选择哪个pod，type指定service的类型
+nodePort和port分别是service的端口和映射的端口
+启动service
+``` cmd
+kubectl create -f service_nginx.yml
+```
+启动服务后，可以通过节点地址和端口访问该nginx服务。
+``` cmd
+kubectl get svc
+```
+显示服务启动成功
+``` cmd
+NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)           AGE
+kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP           2d3h
+nginx-service   NodePort    10.100.241.247   <none>        32333:32334/TCP   65s
+```
+接着访问指定网址和端口就能查看nginx服务了。
+![2.png](2.png)
+
 ## 感谢关注我的公众号
 ![wxgzh.jpg](wxgzh.jpg)
