@@ -40,6 +40,12 @@ nginx        ClusterIP   10.99.158.252   <none>        80/TCP    4m56s
 curl 10.99.158.252:80
 ```
 会输出nginx的页面信息
+另外，当我们使用kubectl命令时可以设置自动补全功能
+``` cmd
+source <(kubectl completion bash)
+```
+设置后kubectl get 然后按下tab就可以自动补全了。
+
 ## 利用deployment启动python网站服务
 先实现该pod文件
 ``` yml
