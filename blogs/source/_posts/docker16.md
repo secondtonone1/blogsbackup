@@ -19,6 +19,7 @@ Docker： 容器技术
 kubelet：负责在创建容器，分配volume和network等
 kube-proxy：主要负责网络端口的代理和转发
 fluentd：负责日志的采集和存储。
+<!--more-->
 
 ## minikube 搭建单节点集群
 安装minikube前提需要安装kubectl和VM
