@@ -6,7 +6,7 @@ tags: [网络编程,Linux环境编程]
 ---
 libevent中提供了一个Hello-world.c 的例子，从这个例子可以学习libevent是如何使用bufferevent的。
 这个例子在Sample中
-![1](Libevent5/1.png)
+![1](1.png)
 这个例子之前讲解过，这次主要看下bufferevent的使用。
 <!--more-->
 ## 第一步找到main函数

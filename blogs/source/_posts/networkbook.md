@@ -38,15 +38,15 @@ tags: [网络编程]
 我推荐新手先看
 
 Linux程序设计(第4版) 
-![1](networkbook/1.jpg)
+![1](1.jpg)
 Linux高性能服务器编程 
-![2](networkbook/2.jpg)
+![2](2.jpg)
 看过之后再看Richard的三本网络书
-![3](networkbook/3.jpg)
+![3](3.jpg)
 这些都看过之后，需要实战，实战过程中可以看看
-![4](networkbook/4.jpg)
+![4](4.jpg)
 以及陈硕的经验之谈，我现在在看的
-![5](networkbook/5.jpg)
+![5](5.jpg)
 
 这些都看过了，可以看看源码
 

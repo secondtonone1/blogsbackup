@@ -13,7 +13,7 @@ tags: [网络编程]
 `3）可扩展性`，可以方便的通过增加 Reactor 实例个数来充分利用 CPU 资源；
 `4）可复用性`， reactor 框架本身与具体事件处理逻辑无关，具有很高的复用性；
 Reactor模式框架
-![1.png](libevlearn/1.png)
+![1.png](1.png)
 <!--more-->
 `1） Handle 意思为句柄`，在Linux表示文件描述符，在windows是socket或者handle。
 

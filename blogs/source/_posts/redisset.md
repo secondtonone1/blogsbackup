@@ -59,9 +59,9 @@ databases ：设置数据库的个数，默认使用的数据库为0，redis有1
 requirepass ：设置登录时需要使用的密码。
 
 下面修改requirepass  为 zjml123456&&REDIS,那么重启redis-server,放在后台运行。效果就是这样
-![1](redisset/1.png)
+![1](1.png)
 然后启动客户端使用密码登录并且查询数据
-![2](redisset/2.png)
+![2](2.png)
 使用密码命令为：auth 密码
 
 设置key和value的命令为: set key value

@@ -5,35 +5,36 @@ categories: [网络编程]
 tags: [网络编程]
 ---
 `libevent框架`之前有做过分析，这次是谈谈如何将libevent搭建在`vs工作环境下`，并且编写一个demo进行测试。测试过程中会再一次带大家分析消息是怎么传递的。我的libevent版本`libevent-2.0.22-stable`，用对应的vs命令工具进入该目录
-![1.png](winlibevent/1.png)
 <!--more-->
+![1.png](1.png)
+
 我的是`Visual Studio 2008版本`的Command Prompt
-![2.png](winlibevent/2.png)
+![2.png](2.png)
 执行成功后在libevent目录下生成三个lib
-![3.png](winlibevent/3.png)
+![3.png](3.png)
 之后用vs创建控制台项目
-![4.png](winlibevent/4.png)
+![4.png](4.png)
 生成成功后在项目目录里创建Include和Lib两个文件夹
-![5.png](winlibevent/5.png)
+![5.png](5.png)
 分别进入libevent这两个目录里边
-![6.png](winlibevent/6.png)
+![6.png](6.png)
 将内部的所有文件拷贝到Include文件夹里，event内容重复可以合并我们项目目录Include文件夹下的内容为
-![7.png](winlibevent/7.png)
+![7.png](7.png)
 将libevent库中的三个lib拷贝到项目的Lib文件夹里
 下一步配置项目属性，完成编译
 `1、配置头文件包含路径，C++/General/Additional Include Directories  配置为相对路径的Include（因配置的路径不同而异）`
-![8.png](winlibevent/8.png)
+![8.png](8.png)
 `2、配置代码生成`
 C/C++ /Code Generation RuntimeLibrary 设置为MTD,因为库的生成是按照这个MTD模式生成的，所以要匹配
-![9.png](winlibevent/9.png)
+![9.png](9.png)
 `3、配置 C/C++ /Advanced/Compile As Compile as C++ Code (/TP) `
 （因为我的工程用到C++的函数所以配置这个）网上有人推荐配置成TC的也可以，自己根据项目需要
-![10.png](winlibevent/10.png)
+![10.png](10.png)
 `4、配置库目录`
 Linker/General/Additional Library Directories   ..\Lib(根据自己的Lib文件夹和项目相对位置填写)
-![11.png](winlibevent/11.png)
+![11.png](11.png)
 5`配置 Linker\Input\AdditionalLibraries `   ws2_32.lib;wsock32.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;
-![12.png](winlibevent/12.png)
+![12.png](12.png)
 6 `配置忽略项，可以不配置` 输入\忽略特定默认库 libc.lib;msvcrt.lib;libcd.lib;libcmtd.lib;msvcrtd.lib;%(IgnoreSpecificDefaultLibraries)
 生成lib后，不带调试信息，无法单步进函数里，所以要修改脚本：`Makefile.nmake第二行CFLAGS=$(CFLAGS) /Od /W3 /wd4996 /nologo /Zi`
 到此为止项目配置好了，我们来写相关的demo代码

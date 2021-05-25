@@ -11,12 +11,12 @@ tags: [C++,网络编程]
 1.  下载protocol buffer， 去google官网或者其他渠道下载protocol buffer包
 
 2.  解压zip文件，进入vs文件夹编译protocol buffer，图示如下
-![1.png](probuff/1.png)
+![1.png](1.png)
 <!-- more -->
 3.  工程下的几个项目都编译一遍，会生成几个lib
-![2.png](probuff/2.png)
+![2.png](2.png)
 在vs目录下的debug目录里能看到
-![3.png](probuff/3.png)
+![3.png](3.png)
 protoc.exe 和 libprotobuf.lib,  libprotobuf-lite.lib , libprotoc.lib这几个lib是新生成的，先放一放，以后会用到。到此为止，google protocol buffer的配置和库已经生成，我们下一步设计自己的proto文件，并生成对应的pb.h和pb.cc  
 4. 编写自己的proto 格式如下  
 ``` cpp
@@ -61,9 +61,9 @@ protoc --proto_path=(.proto文件路径) --cpp_out=(.cc .java生成文件路径)
 windows环境下打开cmd，进入到protocol buf vs目录里debug文件夹里调用protoc命令
 
 我的proto放在D:\win32projects\protobuftest\ProtoBuf目录，所以如下：
-![4.png](probuff/4.png)
+![4.png](4.png)
 进入D:\win32projects\protobuftest\ProtoBuf下可看到新生成的文件
-![5.png](probuff/5.png)
+![5.png](5.png)
 到目前为止，准备工作都做完了，下一步建立自己的项目，使用这些.h和.cc
 
 7. 建立vs项目，我命名为protobuftest，在项目目录里建立Include和Lib，Protobuf  
@@ -77,13 +77,13 @@ windows环境下打开cmd，进入到protocol buf vs目录里debug文件夹里�
    里生成.h和.cc文件。  
 
 Lib文件夹:  
-![6.png](probuff/6.png)
+![6.png](6.png)
 
 Include文件夹：
-![7.png](probuff/7.png)
+![7.png](7.png)
 
 Protobuf文件夹：
-![8.png](probuff/8.png)
+![8.png](8.png)
 bat如下：
 ``` bat
 cd .\Debug
@@ -91,16 +91,16 @@ protoc -I=..\ --cpp_out=..\ ..\smart.msg.proto
 pause
 ```
 8.  将ProtoBuf文件夹里的.h和.cc添加到项目里
-![9.png](probuff/9.png)
+![9.png](9.png)
 
 配置项目属性C/C++ ----> General --->  Additional Include Directories  ..\Include\src  
 
 Linker--->General ----> Additional Library Directories  ..\Lib
-![10.png](probuff/10.png)
-![11.png](probuff/11.png)
+![10.png](10.png)
+![11.png](11.png)
 
 顺便把预编译也关了
-![12.png](probuff/12.png)
+![12.png](12.png)
 9. 项目配置好后写代码：
 ``` cpp
 #include "stdafx.h"
@@ -137,7 +137,7 @@ int _tmain(int argc, _TCHAR* argv[])
 }
 ```
 测试输出 
-![13.png](probuff/13.png)
+![13.png](13.png)
 到此为止windows环境配置和使用google protocol buffer已经解决。  
 ## Linux环境配置和使用：
 1. 解压编译配置，敲命令就可以了：
@@ -150,11 +150,11 @@ cd protobuf-2.6.1
  make install
 ```
 2. 写proto文件和编译，跟上面的相同：
-![14.png](probuff/14.png)
+![14.png](14.png)
 3. 连带.cc文件一同编译，生成目标并执行，以后会写成makefile，这只是个测试程序，就简单测试下  
 记得编译时带上-lpthread 和-lprotobuf
-![15.png](probuff/15.png)
+![15.png](15.png)
  如果运行时提示找不到libprotobuf9.so这个库，可以敲这个命令  
  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-![16.png](probuff/16.png)
+![16.png](16.png)
 到此为止就完成了google protobuf的 学习和配置

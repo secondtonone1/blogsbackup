@@ -39,7 +39,7 @@ double MyClass::f = 0.33;
 4. `当常引用引用变量的时候，可以修改变量值，常引用的数值会随着改变，但是不能直接修改常引用。`
 
 下面是测试  
-![1.png](cppimportant/1.png)
+![1.png](1.png)
 
 ## 二 类的常对象调用的接口必须都为常函数，很多人写法不注意编译会报错。
 代码示例为自己的一个项目，msgStream为常引用，那么他内部的列表返回的迭代器需要用const_iterator
@@ -103,7 +103,7 @@ int main()
 ```
 
 结果：
-![2.png](cppimportant/2.png)
+![2.png](2.png)
 
 ``` cpp
 class c
@@ -138,7 +138,7 @@ int main()
 }
 ```
 结果：
-![3.png](cppimportant/3.png)
+![3.png](3.png)
 
 ``` cpp
 class c
@@ -176,6 +176,6 @@ int main()
 }
 ```
 结果：
-![4.png](cppimportant/4.png)
+![4.png](4.png)
 
 ## 四 list 直接赋值给另外一个list，并不会导致list元素的深拷贝，两个list中的元素是同一份数据
