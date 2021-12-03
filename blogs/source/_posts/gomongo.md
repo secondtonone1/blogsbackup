@@ -8,6 +8,7 @@ tags: [golang]
 mongodb是著名的非关系型数据库，常用来存储大量关联性不大的数据。golang操作mongo数据库可选的库很多，目前主流的使用为"go.mongodb.org/mongo-driver/mongo"，本文通过代码demo的方式介绍go如何操作mongo，实现增删改查，以及多条更新，分组查询，分页查询等复杂查询，代码demo选自个人博客系统的源码。源码地址[https://github.com/secondtonone1/bstgo-blog](https://github.com/secondtonone1/bstgo-blog)
 ## 初始化连接和断开连接
 初始化连接,包含必要的mongo-driver库即可
+<!--more-->
 ``` golang
 import(
     "go.mongodb.org/mongo-driver/mongo"
