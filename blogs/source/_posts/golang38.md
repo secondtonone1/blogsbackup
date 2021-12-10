@@ -8,6 +8,7 @@ tags: [golang]
 上一节我们添加了主页的路由和主页html模板，本节返回一个带参数渲染的模板，并从数据库中load数据添加到html中渲染返回，以及设置中间件，当有请求访问admin后台时判断其是否含有登录cookie，如果没有登录则返回登录页面
 源码地址：
 https://github.com/secondtonone1/bstgo-blog
+<!--more-->
 ## 添加中间件
 gin支持丰富的中间件功能，我们先实现一个跨域访问的功能和检测登录cookie的功能
 ``` golang

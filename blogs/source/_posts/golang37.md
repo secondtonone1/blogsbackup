@@ -7,6 +7,7 @@ tags: [golang]
 ## 简介
 基于gin框架搭建一个博客系统后台，返回html，json等数据与前端交互，包括登录模块，session维持，redis读写缓存，mongo读写等多种技术综合应用，意在打造一个高可用的稳定性博客后台。目前后台已经稳定运行，演示地址http://81.68.86.146:8080/, 源码地址：
 https://github.com/secondtonone1/bstgo-blog
+<!--more-->
 ## 项目结构
 ![https://cdn.llfc.club/1638432058%281%29.jpg](https://cdn.llfc.club/1638432058%281%29.jpg)
 config: 文件夹放的是配置文件以及配置管理模块
