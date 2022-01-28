@@ -14,6 +14,7 @@ element occurs 112 times
 (line 168) When we fetch an element from a map,we
 (line 214) If the element is not found,find returns
 ```
+<!--more-->
 ## 需求分析
 1  我们需要实现一个TextQuery类，将文件的内容按照一行一行放入vector中，vector每个元素就是这一行的内容。
 2  将每一行的内容按照单词分割，构造一个map，单词作为key，行号放入set，set作为value 。这样可以根据单词找到行号的set。
