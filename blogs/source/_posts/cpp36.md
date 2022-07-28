@@ -83,6 +83,10 @@ public:
         //     data->push_back(m);
         // }
     }
+
+    template <typename It>
+    Blob(It b, It e);
+
     // Blob 中元素数目
     size_type size() const { return data->size(); }
     bool empty() const { return data->empty(); }
@@ -170,6 +174,35 @@ void use_classtemp()
     cout << data2 << endl;
 }
 ```
+我们也可以对类的成员函数做模板的定义
+``` cpp
+//模板类的T类型
+template <typename T>
+//成员函数模板It类型
+template <typename It>
+Blob<T>::Blob(It b, It e)
+{
+    //通过迭代器构造
+    data = std::make_shared<std::vector<T>>(b, e);
+}
+```
+我们可以写一个函数测试上面的模板成员函数
+``` cpp
+void use_tempmemfunc()
+{
+    int ia[] = {0, 1, 2, 3, 4};
+    vector<long> vi = {7, 6, 5, 4};
+    list<const char *> w = {"now", "zack", "lov u"};
+    // Blob<T> T被实例化为int，
+    //函数模板It被实例化为 int *
+    Blob<int> a1(begin(ia), end(ia));
+    // It为vi的迭代器类型vector<long>::iterator T为long类型
+    Blob<long> a2(vi.begin(), vi.end());
+    //实例化Blob<string>以及list<const char *>::iterator参数
+    Blob<string> a3(w.begin(), w.end());
+}
+```
+通过迭代器构造Blob类，实现多种类型的绑定。
 ## 总结
 源码链接 [https://gitee.com/secondtonone1/cpplearn](https://gitee.com/secondtonone1/cpplearn)
 视频链接 [https://www.bilibili.com/video/BV1yY4y187SC?spm_id_from=333.999.0.0](https://www.bilibili.com/video/BV1yY4y187SC?spm_id_from=333.999.0.0)
